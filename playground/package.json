@@ -1,0 +1,12 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "3-arrow-challenge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon "
+  },
+  "author": "",
+  "license": "ISC"
+}
