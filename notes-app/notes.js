@@ -1,11 +1,9 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
-export const getNotes = function () {
-  return 'Your notes...';
-};
+export const getNotes = () => 'Your notes...';
 
-export const removeNote = function (title) {
+export const removeNote = (title) => {
   const notes = loadNotes();
   const filteredNotes = notes.filter((note) => note.title !== title);
 
@@ -17,7 +15,7 @@ export const removeNote = function (title) {
   }
 };
 
-export const addNote = function (title, body) {
+export const addNote = (title, body) => {
   const notes = loadNotes();
 
   const filteredNote = notes.filter((note) => note.title === title);
@@ -27,17 +25,18 @@ export const addNote = function (title, body) {
       body: body,
     });
     saveNotes(notes);
-    console.log('New note added');
+    console.log(chalk.green('New note added'));
   } else {
-    console.log('New title taken');
+    console.log(chalk.red('Note given title taken'));
   }
 };
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
   const dataJson = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJson);
 };
-const loadNotes = function () {
+
+const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync('notes.json');
     return JSON.parse(dataBuffer.toString());

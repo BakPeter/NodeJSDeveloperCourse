@@ -20,7 +20,7 @@ yargs(hideBin(process.argv))
         type: 'string',
       },
     },
-    handler: function (argv) {
+    handler(argv) {
       addNote(argv.title, argv.body);
     },
   })
@@ -34,21 +34,21 @@ yargs(hideBin(process.argv))
         type: 'string',
       },
     },
-    handler: function (argv) {
+    handler(argv) {
       removeNote(argv.title);
     },
   })
   .command({
     command: 'read',
     describe: 'Read a note',
-    handler: function () {
+    handler() {
       console.log(chalk.yellow('Reading a note...'));
     },
   })
   .command({
     command: 'list',
     describe: 'List a note',
-    handler: function () {
+    handler() {
       console.log(chalk.blue('Listing a note...'));
     },
   })
