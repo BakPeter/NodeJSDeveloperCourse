@@ -1,9 +1,10 @@
-const add = require('./utils.js');
-const getNotes = require('./notes.js');
+import getNotes from './notes.js';
+// const validator = require('validator');
+// const chalk = require('chalk');
 
-console.log('app.js');
-const sum = add(-4, -6);
-console.log(sum);
+import chalk from 'chalk';
 
 const notes = getNotes();
-console.log(notes);
+console.log(chalk.yellow.bgRed(notes));
+console.log(chalk.magenta.italic('magenta text'));
+console.log(chalk.green.underline.bold('green text'));
