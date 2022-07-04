@@ -1,7 +1,12 @@
-import fs from 'fs';
-import chalk from 'chalk';
+import fs from "fs";
+import chalk from "chalk";
 
-export const getNotes = () => 'Your notes...';
+export const readNote = (title) => {
+  const notes = loadNotes();
+  return notes.find((note) => note.title === title);
+};
+
+export const getNotes = () => loadNotes();
 
 export const removeNote = (title) => {
   const notes = loadNotes();
@@ -9,36 +14,37 @@ export const removeNote = (title) => {
 
   if (notes.length > filteredNotes.length) {
     saveNotes(filteredNotes);
-    console.log(chalk.green('Note with title ' + title + ' removed'));
+    console.log(chalk.green("Note with title " + title + " removed"));
   } else {
-    console.log(chalk.red('Note with title ' + title + " don't exists"));
+    console.log(chalk.red("Note with title " + title + " don't exists"));
   }
 };
 
 export const addNote = (title, body) => {
   const notes = loadNotes();
 
-  const filteredNote = notes.filter((note) => note.title === title);
-  if (filteredNote.length === 0) {
+  // const duplcateNote = notes.filter((note) => note.title === title);
+  const duplcateNote = notes.find((note) => note.title === title);
+  if (!duplcateNote.length) {
     notes.push({
       title: title,
       body: body,
     });
     saveNotes(notes);
-    console.log(chalk.green('New note added'));
+    console.log(chalk.green("New note added"));
   } else {
-    console.log(chalk.red('Note given title taken'));
+    console.log(chalk.red("Note given title taken"));
   }
 };
 
 const saveNotes = (notes) => {
   const dataJson = JSON.stringify(notes);
-  fs.writeFileSync('notes.json', dataJson);
+  fs.writeFileSync("notes.json", dataJson);
 };
 
 const loadNotes = () => {
   try {
-    const dataBuffer = fs.readFileSync('notes.json');
+    const dataBuffer = fs.readFileSync("notes.json");
     return JSON.parse(dataBuffer.toString());
   } catch (error) {
     return [];

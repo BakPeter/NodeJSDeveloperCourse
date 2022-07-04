@@ -1,23 +1,23 @@
-import chalk from 'chalk';
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
-import { addNote, removeNote } from './notes.js';
+import chalk from "chalk";
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
+import { addNote, removeNote, getNotes, readNote } from "./notes.js";
 
 yargs(hideBin(process.argv))
-  .version('1.1.0')
+  .version("1.1.0")
   .command({
-    command: 'add',
-    describe: 'Add a new note',
+    command: "add",
+    describe: "Add a new note",
     builder: {
       title: {
-        describe: 'Note title',
+        describe: "Note title",
         demandOption: true,
-        type: 'string',
+        type: "string",
       },
       body: {
-        describe: 'Note body',
+        describe: "Note body",
         demandOption: true,
-        type: 'string',
+        type: "string",
       },
     },
     handler(argv) {
@@ -25,13 +25,13 @@ yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: 'remove',
-    describe: 'Remove a note',
+    command: "remove",
+    describe: "Remove a note",
     builder: {
       title: {
-        describe: 'title',
+        describe: "title",
         demandOption: true,
-        type: 'string',
+        type: "string",
       },
     },
     handler(argv) {
@@ -39,23 +39,37 @@ yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: 'read',
-    describe: 'Read a note',
-    handler() {
-      console.log(chalk.yellow('Reading a note...'));
+    command: "read",
+    describe: "Read a note",
+    builder: {
+      title: {
+        describe: "title",
+        demandOption: true,
+        type: "string",
+      },
+    },
+    handler(argv) {
+      const note = readNote(argv.title);
+      if (note) {
+        console.log(chalk.green.italic.bold.underline(note.title));
+        console.log(note.body);
+      } else {
+        console.log(chalk.red("Note title not find"));
+      }
     },
   })
   .command({
-    command: 'list',
-    describe: 'List a note',
+    command: "list",
+    describe: "List a note",
     handler() {
-      console.log(chalk.blue('Listing a note...'));
+      console.log(chalk.bold.underline("Your notes"));
+      getNotes().forEach((note) => console.log(note.title + " : " + note.body));
     },
   })
-  .option('verbose', {
-    alias: 'v',
-    type: 'boolean',
-    description: 'Run with verbose looging',
+  .option("verbose", {
+    alias: "v",
+    type: "boolean",
+    description: "Run with verbose looging",
   })
   .parse();
 
