@@ -21,11 +21,13 @@ export const removeNote = (title) => {
 };
 
 export const addNote = (title, body) => {
+  debugger;
+
   const notes = loadNotes();
 
   // const duplcateNote = notes.filter((note) => note.title === title);
   const duplcateNote = notes.find((note) => note.title === title);
-  if (!duplcateNote.length) {
+  if (!duplcateNote) {
     notes.push({
       title: title,
       body: body,
