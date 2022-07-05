@@ -21,8 +21,6 @@ export const removeNote = (title) => {
 };
 
 export const addNote = (title, body) => {
-  debugger;
-
   const notes = loadNotes();
 
   // const duplcateNote = notes.filter((note) => note.title === title);
