@@ -11,7 +11,7 @@
       "skipFiles": ["<node_internals>/**"],
       "args": ["add", "--title=course111", "--body=node.js"],
       //   "args": ["list"],
-      "program": "${workspaceFolder}\\notes-app\\app.js"
+      "program": "${workspaceFolder}\\weather-app\\app.js"
     }
   ]
 }
