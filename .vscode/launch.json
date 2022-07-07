@@ -9,9 +9,9 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "args": ["add", "--title=course111", "--body=node.js"],
+      "args": ["2", "4"],
       //   "args": ["list"],
-      "program": "${workspaceFolder}\\weather-app\\app.js"
+      "program": "${workspaceFolder}\\playground\\4-callbacks.js"
     }
   ]
 }
