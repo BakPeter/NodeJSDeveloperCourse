@@ -11,7 +11,7 @@
       "skipFiles": ["<node_internals>/**"],
       "args": ["2", "4"],
       //   "args": ["list"],
-      "program": "${workspaceFolder}\\playground\\4-callbacks.js"
+      "program": "${workspaceFolder}\\playground\\5-es6-objects.js"
     }
   ]
 }
