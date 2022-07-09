@@ -1,11 +1,23 @@
-import request from 'request';
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
-const url =
-  'http://api.weatherstack.com/current?access_key=62b79179d0e843e6f70dfbfc7ef40ca5&query=37.8267,-122.4233';
+const address = process.argv[2]
 
-request({ url: url, json: true }, (error, response) => {
-  //   console.log(response);
-  //   const data = JSON.parse(response.body);
-  //   console.log(data);
-  console.log(response.body.current);
-});
+if (!address) {
+    console.log('Please provide an address')
+} else {
+    geocode(address, (error, data) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        forecast(data.latitude, data.longitude, (error, forecastData) => {
+            if (error) {
+                return console.log(error)
+            }
+
+            console.log(data.location)
+            console.log(forecastData)
+        })
+    })
+}
