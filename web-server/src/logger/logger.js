@@ -13,7 +13,7 @@ export const logger = winston.createLogger({
       format: winston.format.simple(),
     }),
     new SeqTransport({
-      serverUrl: 'http://127.0.0.1:50000',
+      serverUrl: 'http://127.0.0.1:5341',
       // apiKey: 'FEvn39ftwXUZxBqsMo4s0',
       onError: (e) => {
         console.error(e);
